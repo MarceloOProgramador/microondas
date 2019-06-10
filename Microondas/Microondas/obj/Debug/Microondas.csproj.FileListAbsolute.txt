@@ -1,0 +1,10 @@
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\bin\Debug\Microondas.exe.config
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\bin\Debug\Microondas.exe
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\bin\Debug\Microondas.pdb
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.csprojAssemblyReference.cache
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.Form1.resources
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.Properties.Resources.resources
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.csproj.GenerateResource.cache
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.csproj.CoreCompileInputs.cache
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.exe
+C:\Users\Marcelo\Desktop\microondas-cs\Microondas\Microondas\obj\Debug\Microondas.pdb
