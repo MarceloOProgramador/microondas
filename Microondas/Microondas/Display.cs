@@ -8,42 +8,99 @@ namespace Microondas
 {
     class Display
     {
-        private int minutes = 00;
-        private int secunds = 00;
-        private string counter;
+        private int minutes;
+        private int secunds;
+        private string contador;
 
         public int Minutes { get => minutes; set => minutes = value;}
         public int Secunds { get => secunds; set => secunds = value;}
-        public string Counter { get => counter; set => counter = value;}
+        public string Contador { get => contador; set => contador = value;}
 
         /**
          * nome: makeDisplay;
          * Descricao: Esse método irá construir o display timer, para a contagem;
-         * return string Counter
-         */
-        public void makeDisplay()
-        {
-            Counter = Convert.ToString(Minutes) + ':' + Convert.ToString(Secunds);            
-        }
-
-        /**
-         * Nome: separarMinutosESegundos;
-         * Descricao: Esse método irá pegar a assinatura passada, e em cima desse valor 
-         * irá separar os minutos e os segundos passando-os para o metodo makeDisplay();
          * return void;
          */
-        public void separarMinutosESegundos(int numeroAdicionar)
+        public void makeDisplay(int tempo)
         {
-            if (numeroAdicionar > 60) 
+            if (Convert.ToString(tempo).Length <= 2)
             {
-                Minutes = numeroAdicionar / 60;
-                Secunds = numeroAdicionar % 60;
+                if (Convert.ToInt16(tempo) >= 60)
+                {
+                    Minutes += Convert.ToInt16(tempo) / 60;
+                    Secunds = Convert.ToInt16(tempo) % 60;
+                }
+                else
+                    Secunds = tempo;
             }
             else
             {
-                Secunds = numeroAdicionar;
+                if(Convert.ToString(tempo).Length == 3)
+                {
+                    Minutes = Convert.ToInt16(Convert.ToString(tempo).Substring(0, 1));
+                    
+                    if (Convert.ToInt16(Convert.ToString(tempo).Substring(1, 2)) >= 60)
+                    {
+
+                        if (Convert.ToInt16(tempo) / 60 > 2)
+                        {
+                            Minutes = Convert.ToInt16(tempo) / 60;
+                            Secunds = Convert.ToInt16(tempo) % 60;
+                        }
+                        else
+                        {
+                            Minutes = 02;
+                            Secunds = 00;
+                        }
+                    }
+                    else
+                        Secunds = Convert.ToInt16(Convert.ToString(tempo).Substring(1, 2));
+                }
             }
-            this.makeDisplay();
+
+            atualizarContador();
+        }
+
+        public bool contagemDePrepaparo()
+        {
+            if (Minutes == 0 && Secunds == 0)
+            {
+                return true;
+            }
+            else
+            {
+                Secunds--;
+                if (Secunds < 0)
+                {
+                    Secunds = 59;
+                    Minutes--;
+
+                }
+                atualizarContador();
+            }
+            return false;
+        }
+
+        public void atualizarContador()
+        {
+            if (Minutes != 2)
+                if(Convert.ToString(Secunds).Length == 1)
+                    Contador = "0" + Minutes + ":0" + Secunds;
+                else
+                    Contador = "0" + Minutes + ":" + Secunds;
+            else
+            {
+                Minutes = 02;
+                Secunds = 00;
+            }
+                
+        }
+
+        public void cancel()
+        {
+            Minutes = 00;
+            Secunds = 00;
+            atualizarContador();
         }
     }
 }

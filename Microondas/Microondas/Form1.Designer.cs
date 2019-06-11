@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.counter = new System.Windows.Forms.Label();
             this.pratoRapidoBatata = new System.Windows.Forms.Button();
@@ -56,10 +57,12 @@
             this.btn4 = new System.Windows.Forms.Button();
             this.btnPausar = new System.Windows.Forms.Button();
             this.btnIniciar = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lb_potencia = new System.Windows.Forms.Label();
             this.maisPotencia = new System.Windows.Forms.Button();
-            this.menosPotencia = new System.Windows.Forms.Button();
             this.btn0 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -294,6 +297,7 @@
             this.btnCancelar.TabIndex = 30;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // btn4
             // 
@@ -313,6 +317,7 @@
             this.btnPausar.TabIndex = 33;
             this.btnPausar.Text = "Pausar";
             this.btnPausar.UseVisualStyleBackColor = true;
+            this.btnPausar.Click += new System.EventHandler(this.BtnPausar_Click);
             // 
             // btnIniciar
             // 
@@ -322,15 +327,16 @@
             this.btnIniciar.TabIndex = 34;
             this.btnIniciar.Text = "Íniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.BtnIniciar_Click);
             // 
-            // label6
+            // lb_potencia
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(269, 77);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Potência: 10";
+            this.lb_potencia.AutoSize = true;
+            this.lb_potencia.Location = new System.Drawing.Point(269, 77);
+            this.lb_potencia.Name = "lb_potencia";
+            this.lb_potencia.Size = new System.Drawing.Size(67, 13);
+            this.lb_potencia.TabIndex = 35;
+            this.lb_potencia.Text = "Potência: 10";
             // 
             // maisPotencia
             // 
@@ -340,15 +346,7 @@
             this.maisPotencia.TabIndex = 36;
             this.maisPotencia.Text = "+";
             this.maisPotencia.UseVisualStyleBackColor = true;
-            // 
-            // menosPotencia
-            // 
-            this.menosPotencia.Location = new System.Drawing.Point(213, 72);
-            this.menosPotencia.Name = "menosPotencia";
-            this.menosPotencia.Size = new System.Drawing.Size(22, 23);
-            this.menosPotencia.TabIndex = 37;
-            this.menosPotencia.Text = "-";
-            this.menosPotencia.UseVisualStyleBackColor = true;
+            this.maisPotencia.Click += new System.EventHandler(this.MaisPotencia_Click);
             // 
             // btn0
             // 
@@ -360,15 +358,41 @@
             this.btn0.UseVisualStyleBackColor = true;
             this.btn0.Click += new System.EventHandler(this.adicionarTempo);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(214, 72);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(22, 23);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "-";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.menosPotencia);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(252, 489);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 71);
+            this.button2.TabIndex = 40;
+            this.button2.Text = "Ínicio Rápido (30 seg)";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.inicioRapido);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 659);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn0);
-            this.Controls.Add(this.menosPotencia);
             this.Controls.Add(this.maisPotencia);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lb_potencia);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.btnPausar);
             this.Controls.Add(this.btn4);
@@ -399,6 +423,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,10 +459,12 @@
         private System.Windows.Forms.Button btn4;
         private System.Windows.Forms.Button btnPausar;
         private System.Windows.Forms.Button btnIniciar;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lb_potencia;
         private System.Windows.Forms.Button maisPotencia;
-        private System.Windows.Forms.Button menosPotencia;
         private System.Windows.Forms.Button btn0;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
