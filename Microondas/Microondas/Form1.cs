@@ -13,8 +13,10 @@ namespace Microondas
     public partial class Form1 : Form
     {
         private Display Display;
-        private string tempo;
+        private string tempo = "";
         private int potencia = 10;
+        private bool pausado = false;
+        private string pratosPreDefinidos = "Carne;Frango;Peixe;Feijao;Batata;Macarrao;Arroz";
 
         public string Tempo { get => tempo; set => tempo = value;}
         public int Potencia { get => potencia; set => potencia = value; }
@@ -31,7 +33,8 @@ namespace Microondas
 
         private void iniciar()
         {
-            if (Display.Minutes <= 2 && (Display.Secunds >= 00 || Display.Secunds == 00))
+            atualizarPotencia();
+            if (Display.Minutes != 00 || Display.Secunds != 00)
             {
                 timer1.Enabled = true;
             }
@@ -43,11 +46,9 @@ namespace Microondas
 
         private void adicionarTempo(object sender, EventArgs e)
         {
-            if (timer1.Enabled != true)
+            if (!timer1.Enabled)
             {
-                Display = new Display();
                 Button btn = (Button)sender;
-
                 concatenarTempo(Convert.ToInt16(btn.Text));
             }
             else
@@ -61,9 +62,11 @@ namespace Microondas
 
         private void concatenarTempo(int numeroSelecionado)
         {
-            Tempo += Convert.ToString(numeroSelecionado);
-
-            checarTempo(Tempo);
+            if(Tempo.Length < 4)
+            {
+                Tempo += Convert.ToString(numeroSelecionado);
+            }
+            checarTempo();
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -84,6 +87,7 @@ namespace Microondas
         {
             resetar();
             timer1.Enabled = false;
+            pausado = false;
             Display.cancel();
             atualizarPotencia();
             atualizarContador();
@@ -103,12 +107,13 @@ namespace Microondas
         private void BtnPausar_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+            pausado = true;
             resetar();
         }
 
         private void MaisPotencia_Click(object sender, EventArgs e)
         {
-            if (Potencia < 10)
+            if (Potencia < 10 && timer1.Enabled != true)
             {
                 Potencia++;
             }
@@ -120,7 +125,7 @@ namespace Microondas
 
         private void menosPotencia(object sender, EventArgs e)
         {
-            if (Potencia > 1)
+            if (Potencia > 1 && timer1.Enabled != true)
             {
                 Potencia--;
             }
@@ -131,38 +136,102 @@ namespace Microondas
 
         private void atualizarPotencia()
         {
+            Display.Potencia = Potencia;
             lb_potencia.Text = "Potência: " + Convert.ToString(Potencia);
         }
 
         private void inicioRapido(object sender, EventArgs e)
         {
-            bool inici_rapido = true;
-            if(timer1.Enabled != true || inici_rapido)
+            Potencia = 8;
+            Tempo = Convert.ToString(Display.Secunds + 30);
+            checarTempo();
+            if (timer1.Enabled == false)
             {
-                Potencia = 8;
-                checarTempo(Convert.ToString(Display.Secunds + 30));
-                if (timer1.Enabled == false)
+                atualizarPotencia();
+                iniciar();
+            }
+            
+        }
+
+        private void checarTempo()
+        {
+            Display.makeDisplay(Convert.ToInt16(Tempo));
+            atualizarContador();
+        }
+
+        private void funcoesPreDefinidas(object sender, EventArgs e)
+        {
+            Button opcao = (Button)sender;
+            string []pratos = pratosPreDefinidos.Split(';');
+
+            if(timer1.Enabled != true && !pausado)
+            {
+                if (pratos.Contains(opcao.Text))
                 {
-                    atualizarPotencia();
-                    iniciar();
+                    if (encontrarFuncaoPredefinida(opcao.Text))
+                    {
+                        checarTempo();
+                        atualizarPotencia();
+                        iniciar();
+                    }
                 }
-                resetar();
+                else
+                {
+                    counter.Text = "Não existe!";
+                }
             }
         }
 
-        private void checarTempo(string tempo)
+        private bool encontrarFuncaoPredefinida(string prato)
         {
-            Tempo = tempo;
-            if (Convert.ToInt16(Tempo) <= 200)
+            bool prato_encontrado = false;
+            switch(prato)
             {
-                Display.makeDisplay(Convert.ToInt16(Tempo));
-                atualizarContador();
+                case "Carne":
+                    prato_encontrado = true;
+                    Tempo = "120";
+                    Potencia = 9;
+                    Display.IndicadorDePotencia = "C";
+                    break;
+                case "Frango":
+                    prato_encontrado = true;
+                    Tempo = "60";
+                    Potencia = 10;
+                    Display.IndicadorDePotencia = "F";
+                    break;
+                case "Peixe":
+                    prato_encontrado = true;
+                    Tempo = "90";
+                    Potencia = 5;
+                    Display.IndicadorDePotencia = "F";
+                    break;
+                case "Feijao":
+                    prato_encontrado = true;
+                    Tempo = "60";
+                    potencia = 4;
+                    Display.IndicadorDePotencia = "B";
+                    break;
+                case "Batata":
+                    prato_encontrado = true;
+                    Tempo = "60";
+                    potencia = 7;
+                    Display.IndicadorDePotencia = "P";
+                    break;
+                case "Macarrao":
+                    prato_encontrado = true;
+                    Tempo = "30";
+                    potencia = 8;
+                    Display.IndicadorDePotencia = "M";
+                    break;
+                case "Arroz":
+                    prato_encontrado = true;
+                    Tempo = "120";
+                    potencia = 4;
+                    Display.IndicadorDePotencia = "A";
+                    break;
+                    
             }
-            else
-            {
-                Display.Minutes = 02;
-                Display.Secunds = 00;
-            }
+            return prato_encontrado;
         }
     }
 }

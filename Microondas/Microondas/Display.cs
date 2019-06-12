@@ -8,13 +8,18 @@ namespace Microondas
 {
     class Display
     {
-        private int minutes;
-        private int secunds;
+        private int minutes = 00;
+        private int secunds = 00;
         private string contador;
+        private int potencia;
+        private string indicadorDePotencia = ".";
+        private int contadorDePotencia = 0;
 
         public int Minutes { get => minutes; set => minutes = value;}
         public int Secunds { get => secunds; set => secunds = value;}
         public string Contador { get => contador; set => contador = value;}
+        public int Potencia { get => potencia; set => potencia = value; }
+        public string IndicadorDePotencia { get => indicadorDePotencia; set => indicadorDePotencia = value;}
 
         /**
          * nome: makeDisplay;
@@ -23,55 +28,12 @@ namespace Microondas
          */
         public void makeDisplay(int tempo)
         {
-            if (Convert.ToString(tempo).Length <= 2)
-            {
-                if (Convert.ToInt16(tempo) >= 60)
-                {
-                    if((Minutes + Convert.ToInt16(tempo) / 60) < 2)
-                    {
-                        Minutes += Convert.ToInt16(tempo) / 60;
-                        Secunds = Convert.ToInt16(tempo) % 60;
-                    }
-                    else
-                    {
-                        Minutes = 02;
-                        Secunds = 00;
-                    }
-                }
-                else
-                {
-                    if (Minutes >= 2)
-                    {
-                        Minutes = 02;
-                        Secunds = 00;
-                    }
-                    else
-                        Secunds = tempo;
-                }  
-            }
-            else
-            {
-                if(Convert.ToString(tempo).Length == 3)
-                {
-                    Minutes += Convert.ToInt16(Convert.ToString(tempo).Substring(0, 1));
-                    
-                    if (Convert.ToInt16(Convert.ToString(tempo).Substring(1, 2)) >= 60)
-                    {
+            Minutes += tempo / 60;
+            Secunds = tempo % 60;
 
-                        if (Convert.ToInt16(tempo) / 60 < 2)
-                        {
-                            Minutes = Convert.ToInt16(tempo) / 60;
-                            Secunds = Convert.ToInt16(tempo) % 60;
-                        }
-                        else
-                        {
-                            Minutes = 02;
-                            Secunds = 00;
-                        }
-                    }
-                    else
-                        Secunds = Convert.ToInt16(Convert.ToString(tempo).Substring(1, 2));
-                }
+            if (Minutes >= 2 && Secunds > 0)
+            {
+                setarDoisMinutos();
             }
 
             atualizarContador();
@@ -79,36 +41,52 @@ namespace Microondas
 
         public bool contagemDePrepaparo()
         {
+            if(IndicadorDePotencia.Contains(".") || indicadorDePotencia == "")
+            {
+                if (contadorDePotencia >= Potencia)
+                {
+                    contadorDePotencia = 0;
+                    IndicadorDePotencia = "";
+                }
+                else
+                {
+                    IndicadorDePotencia += ".";
+                    contadorDePotencia++;
+                }
+            }
+
             if (Minutes == 0 && Secunds == 0)
             {
+                IndicadorDePotencia = "";
                 return true;
             }
             else
             {
                 Secunds--;
+                
                 if (Secunds < 0)
                 {
                     Secunds = 59;
                     Minutes--;
 
                 }
+
                 atualizarContador();
             }
+            
             return false;
         }
 
         public void atualizarContador()
         {
+
             if (Minutes <= 2)
-                if(Convert.ToString(Secunds).Length == 1)
-                    Contador = "0" + Minutes + ":0" + Secunds;
+                if (Convert.ToString(Secunds).Length == 1)
+                    Contador = "0" + Minutes + ":0" + Secunds + " " + IndicadorDePotencia;
                 else
-                    Contador = "0" + Minutes + ":" + Secunds;
+                    Contador = "0" + Minutes + ":" + Secunds + " " + IndicadorDePotencia;
             else
-            {
-                Minutes = 02;
-                Secunds = 00;
-            }
+                setarDoisMinutos();
                 
         }
 
@@ -116,7 +94,14 @@ namespace Microondas
         {
             Minutes = 00;
             Secunds = 00;
+            indicadorDePotencia = "";
             atualizarContador();
+        }
+
+        public void setarDoisMinutos()
+        {
+            Minutes = 02;
+            Secunds = 00;
         }
     }
 }

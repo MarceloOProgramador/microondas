@@ -30,13 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.counter = new System.Windows.Forms.Label();
             this.pratoRapidoBatata = new System.Windows.Forms.Button();
             this.pratoRapidoMacarrao = new System.Windows.Forms.Button();
             this.pratoRapidoArroz = new System.Windows.Forms.Button();
-            this.kidsPipoca = new System.Windows.Forms.Button();
-            this.kidsHamburger = new System.Windows.Forms.Button();
-            this.kidsBrigadeiro = new System.Windows.Forms.Button();
             this.descongelarCarne = new System.Windows.Forms.Button();
             this.descongelarFrango = new System.Windows.Forms.Button();
             this.descongelarPeixe = new System.Windows.Forms.Button();
@@ -44,7 +40,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
             this.btn3 = new System.Windows.Forms.Button();
@@ -63,6 +58,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.counter = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,16 +68,6 @@
             this.label1.Size = new System.Drawing.Size(100, 23);
             this.label1.TabIndex = 0;
             // 
-            // counter
-            // 
-            this.counter.AutoSize = true;
-            this.counter.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.counter.Location = new System.Drawing.Point(106, 9);
-            this.counter.Name = "counter";
-            this.counter.Size = new System.Drawing.Size(130, 51);
-            this.counter.TabIndex = 1;
-            this.counter.Text = "00:00";
-            // 
             // pratoRapidoBatata
             // 
             this.pratoRapidoBatata.Location = new System.Drawing.Point(18, 158);
@@ -90,6 +76,7 @@
             this.pratoRapidoBatata.TabIndex = 2;
             this.pratoRapidoBatata.Text = "Batata";
             this.pratoRapidoBatata.UseVisualStyleBackColor = true;
+            this.pratoRapidoBatata.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // pratoRapidoMacarrao
             // 
@@ -97,8 +84,9 @@
             this.pratoRapidoMacarrao.Name = "pratoRapidoMacarrao";
             this.pratoRapidoMacarrao.Size = new System.Drawing.Size(75, 23);
             this.pratoRapidoMacarrao.TabIndex = 3;
-            this.pratoRapidoMacarrao.Text = "Macarrão";
+            this.pratoRapidoMacarrao.Text = "Macarrao";
             this.pratoRapidoMacarrao.UseVisualStyleBackColor = true;
+            this.pratoRapidoMacarrao.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // pratoRapidoArroz
             // 
@@ -108,33 +96,7 @@
             this.pratoRapidoArroz.TabIndex = 4;
             this.pratoRapidoArroz.Text = "Arroz";
             this.pratoRapidoArroz.UseVisualStyleBackColor = true;
-            // 
-            // kidsPipoca
-            // 
-            this.kidsPipoca.Location = new System.Drawing.Point(18, 207);
-            this.kidsPipoca.Name = "kidsPipoca";
-            this.kidsPipoca.Size = new System.Drawing.Size(75, 23);
-            this.kidsPipoca.TabIndex = 8;
-            this.kidsPipoca.Text = "Pipoca";
-            this.kidsPipoca.UseVisualStyleBackColor = true;
-            // 
-            // kidsHamburger
-            // 
-            this.kidsHamburger.Location = new System.Drawing.Point(139, 207);
-            this.kidsHamburger.Name = "kidsHamburger";
-            this.kidsHamburger.Size = new System.Drawing.Size(75, 23);
-            this.kidsHamburger.TabIndex = 9;
-            this.kidsHamburger.Text = "Hamburger";
-            this.kidsHamburger.UseVisualStyleBackColor = true;
-            // 
-            // kidsBrigadeiro
-            // 
-            this.kidsBrigadeiro.Location = new System.Drawing.Point(258, 207);
-            this.kidsBrigadeiro.Name = "kidsBrigadeiro";
-            this.kidsBrigadeiro.Size = new System.Drawing.Size(75, 23);
-            this.kidsBrigadeiro.TabIndex = 10;
-            this.kidsBrigadeiro.Text = "Brigadeiro";
-            this.kidsBrigadeiro.UseVisualStyleBackColor = true;
+            this.pratoRapidoArroz.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // descongelarCarne
             // 
@@ -144,6 +106,7 @@
             this.descongelarCarne.TabIndex = 11;
             this.descongelarCarne.Text = "Carne";
             this.descongelarCarne.UseVisualStyleBackColor = true;
+            this.descongelarCarne.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // descongelarFrango
             // 
@@ -153,6 +116,7 @@
             this.descongelarFrango.TabIndex = 12;
             this.descongelarFrango.Text = "Frango";
             this.descongelarFrango.UseVisualStyleBackColor = true;
+            this.descongelarFrango.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // descongelarPeixe
             // 
@@ -162,6 +126,7 @@
             this.descongelarPeixe.TabIndex = 13;
             this.descongelarPeixe.Text = "Peixe";
             this.descongelarPeixe.UseVisualStyleBackColor = true;
+            this.descongelarPeixe.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // descongelarFeijao
             // 
@@ -169,8 +134,9 @@
             this.descongelarFeijao.Name = "descongelarFeijao";
             this.descongelarFeijao.Size = new System.Drawing.Size(75, 23);
             this.descongelarFeijao.TabIndex = 14;
-            this.descongelarFeijao.Text = "Feijão";
+            this.descongelarFeijao.Text = "Feijao";
             this.descongelarFeijao.UseVisualStyleBackColor = true;
+            this.descongelarFeijao.Click += new System.EventHandler(this.funcoesPreDefinidas);
             // 
             // label3
             // 
@@ -199,19 +165,9 @@
             this.label5.Size = new System.Drawing.Size(100, 23);
             this.label5.TabIndex = 0;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(14, 184);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 17);
-            this.label7.TabIndex = 18;
-            this.label7.Text = "Kids";
-            // 
             // btn1
             // 
-            this.btn1.Location = new System.Drawing.Point(18, 258);
+            this.btn1.Location = new System.Drawing.Point(18, 242);
             this.btn1.Name = "btn1";
             this.btn1.Size = new System.Drawing.Size(75, 71);
             this.btn1.TabIndex = 19;
@@ -221,7 +177,7 @@
             // 
             // btn2
             // 
-            this.btn2.Location = new System.Drawing.Point(139, 258);
+            this.btn2.Location = new System.Drawing.Point(139, 242);
             this.btn2.Name = "btn2";
             this.btn2.Size = new System.Drawing.Size(75, 71);
             this.btn2.TabIndex = 20;
@@ -231,7 +187,7 @@
             // 
             // btn3
             // 
-            this.btn3.Location = new System.Drawing.Point(252, 258);
+            this.btn3.Location = new System.Drawing.Point(252, 242);
             this.btn3.Name = "btn3";
             this.btn3.Size = new System.Drawing.Size(75, 71);
             this.btn3.TabIndex = 21;
@@ -241,7 +197,7 @@
             // 
             // btn5
             // 
-            this.btn5.Location = new System.Drawing.Point(139, 335);
+            this.btn5.Location = new System.Drawing.Point(139, 319);
             this.btn5.Name = "btn5";
             this.btn5.Size = new System.Drawing.Size(75, 71);
             this.btn5.TabIndex = 23;
@@ -251,7 +207,7 @@
             // 
             // btn6
             // 
-            this.btn6.Location = new System.Drawing.Point(252, 335);
+            this.btn6.Location = new System.Drawing.Point(252, 319);
             this.btn6.Name = "btn6";
             this.btn6.Size = new System.Drawing.Size(75, 71);
             this.btn6.TabIndex = 24;
@@ -261,7 +217,7 @@
             // 
             // btn7
             // 
-            this.btn7.Location = new System.Drawing.Point(18, 412);
+            this.btn7.Location = new System.Drawing.Point(18, 396);
             this.btn7.Name = "btn7";
             this.btn7.Size = new System.Drawing.Size(75, 71);
             this.btn7.TabIndex = 25;
@@ -271,7 +227,7 @@
             // 
             // btn8
             // 
-            this.btn8.Location = new System.Drawing.Point(139, 412);
+            this.btn8.Location = new System.Drawing.Point(139, 396);
             this.btn8.Name = "btn8";
             this.btn8.Size = new System.Drawing.Size(75, 71);
             this.btn8.TabIndex = 26;
@@ -281,7 +237,7 @@
             // 
             // btn9
             // 
-            this.btn9.Location = new System.Drawing.Point(252, 412);
+            this.btn9.Location = new System.Drawing.Point(252, 396);
             this.btn9.Name = "btn9";
             this.btn9.Size = new System.Drawing.Size(75, 71);
             this.btn9.TabIndex = 27;
@@ -291,9 +247,9 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(8, 576);
+            this.btnCancelar.Location = new System.Drawing.Point(8, 559);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(101, 71);
+            this.btnCancelar.Size = new System.Drawing.Size(101, 45);
             this.btnCancelar.TabIndex = 30;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -301,7 +257,7 @@
             // 
             // btn4
             // 
-            this.btn4.Location = new System.Drawing.Point(17, 335);
+            this.btn4.Location = new System.Drawing.Point(17, 319);
             this.btn4.Name = "btn4";
             this.btn4.Size = new System.Drawing.Size(75, 71);
             this.btn4.TabIndex = 32;
@@ -311,9 +267,9 @@
             // 
             // btnPausar
             // 
-            this.btnPausar.Location = new System.Drawing.Point(115, 576);
+            this.btnPausar.Location = new System.Drawing.Point(115, 559);
             this.btnPausar.Name = "btnPausar";
-            this.btnPausar.Size = new System.Drawing.Size(101, 71);
+            this.btnPausar.Size = new System.Drawing.Size(101, 45);
             this.btnPausar.TabIndex = 33;
             this.btnPausar.Text = "Pausar";
             this.btnPausar.UseVisualStyleBackColor = true;
@@ -321,9 +277,9 @@
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Location = new System.Drawing.Point(222, 576);
+            this.btnIniciar.Location = new System.Drawing.Point(222, 559);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(101, 71);
+            this.btnIniciar.Size = new System.Drawing.Size(101, 45);
             this.btnIniciar.TabIndex = 34;
             this.btnIniciar.Text = "Íniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
@@ -350,7 +306,7 @@
             // 
             // btn0
             // 
-            this.btn0.Location = new System.Drawing.Point(141, 489);
+            this.btn0.Location = new System.Drawing.Point(141, 473);
             this.btn0.Name = "btn0";
             this.btn0.Size = new System.Drawing.Size(75, 71);
             this.btn0.TabIndex = 38;
@@ -375,7 +331,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(252, 489);
+            this.button2.Location = new System.Drawing.Point(252, 473);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 71);
             this.button2.TabIndex = 40;
@@ -383,11 +339,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.inicioRapido);
             // 
+            // counter
+            // 
+            this.counter.AutoSize = true;
+            this.counter.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.counter.Location = new System.Drawing.Point(123, 22);
+            this.counter.Name = "counter";
+            this.counter.Size = new System.Drawing.Size(103, 37);
+            this.counter.TabIndex = 42;
+            this.counter.Text = "00:00";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 659);
+            this.ClientSize = new System.Drawing.Size(339, 616);
+            this.Controls.Add(this.counter);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn0);
@@ -405,7 +372,6 @@
             this.Controls.Add(this.btn3);
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.btn1);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -413,13 +379,9 @@
             this.Controls.Add(this.descongelarPeixe);
             this.Controls.Add(this.descongelarFrango);
             this.Controls.Add(this.descongelarCarne);
-            this.Controls.Add(this.kidsBrigadeiro);
-            this.Controls.Add(this.kidsHamburger);
-            this.Controls.Add(this.kidsPipoca);
             this.Controls.Add(this.pratoRapidoArroz);
             this.Controls.Add(this.pratoRapidoMacarrao);
             this.Controls.Add(this.pratoRapidoBatata);
-            this.Controls.Add(this.counter);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -432,13 +394,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label counter;
         private System.Windows.Forms.Button pratoRapidoBatata;
         private System.Windows.Forms.Button pratoRapidoMacarrao;
         private System.Windows.Forms.Button pratoRapidoArroz;
-        private System.Windows.Forms.Button kidsPipoca;
-        private System.Windows.Forms.Button kidsHamburger;
-        private System.Windows.Forms.Button kidsBrigadeiro;
         private System.Windows.Forms.Button descongelarCarne;
         private System.Windows.Forms.Button descongelarFrango;
         private System.Windows.Forms.Button descongelarPeixe;
@@ -446,7 +404,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn3;
@@ -465,6 +422,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label counter;
     }
 }
 
