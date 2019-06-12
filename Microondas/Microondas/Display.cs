@@ -27,22 +27,38 @@ namespace Microondas
             {
                 if (Convert.ToInt16(tempo) >= 60)
                 {
-                    Minutes += Convert.ToInt16(tempo) / 60;
-                    Secunds = Convert.ToInt16(tempo) % 60;
+                    if((Minutes + Convert.ToInt16(tempo) / 60) < 2)
+                    {
+                        Minutes += Convert.ToInt16(tempo) / 60;
+                        Secunds = Convert.ToInt16(tempo) % 60;
+                    }
+                    else
+                    {
+                        Minutes = 02;
+                        Secunds = 00;
+                    }
                 }
                 else
-                    Secunds = tempo;
+                {
+                    if (Minutes >= 2)
+                    {
+                        Minutes = 02;
+                        Secunds = 00;
+                    }
+                    else
+                        Secunds = tempo;
+                }  
             }
             else
             {
                 if(Convert.ToString(tempo).Length == 3)
                 {
-                    Minutes = Convert.ToInt16(Convert.ToString(tempo).Substring(0, 1));
+                    Minutes += Convert.ToInt16(Convert.ToString(tempo).Substring(0, 1));
                     
                     if (Convert.ToInt16(Convert.ToString(tempo).Substring(1, 2)) >= 60)
                     {
 
-                        if (Convert.ToInt16(tempo) / 60 > 2)
+                        if (Convert.ToInt16(tempo) / 60 < 2)
                         {
                             Minutes = Convert.ToInt16(tempo) / 60;
                             Secunds = Convert.ToInt16(tempo) % 60;
@@ -83,7 +99,7 @@ namespace Microondas
 
         public void atualizarContador()
         {
-            if (Minutes != 2)
+            if (Minutes <= 2)
                 if(Convert.ToString(Secunds).Length == 1)
                     Contador = "0" + Minutes + ":0" + Secunds;
                 else

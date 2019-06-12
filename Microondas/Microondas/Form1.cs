@@ -31,7 +31,7 @@ namespace Microondas
 
         private void iniciar()
         {
-            if (Display.Minutes <= 2 && Display.Secunds >= 1)
+            if (Display.Minutes <= 2 && (Display.Secunds >= 00 || Display.Secunds == 00))
             {
                 timer1.Enabled = true;
             }
@@ -43,15 +43,15 @@ namespace Microondas
 
         private void adicionarTempo(object sender, EventArgs e)
         {
-            Display = new Display();
-            Button btn = (Button)sender;
+            if (timer1.Enabled != true)
+            {
+                Display = new Display();
+                Button btn = (Button)sender;
 
-            concatenarTempo(Convert.ToInt16(btn.Text));
-        }
-
-        private void mostarTempo()
-        {
-            atualizarContador();
+                concatenarTempo(Convert.ToInt16(btn.Text));
+            }
+            else
+                return;
         }
 
         private void BtnIniciar_Click(object sender, EventArgs e)
@@ -63,15 +63,7 @@ namespace Microondas
         {
             Tempo += Convert.ToString(numeroSelecionado);
 
-            if (Convert.ToInt16(Tempo) <= 200)
-            {
-                Display.makeDisplay(Convert.ToInt16(Tempo));
-                atualizarContador();
-            }
-            else
-            {
-                counter.Text = "02:00";
-            }
+            checarTempo(Tempo);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
@@ -81,6 +73,7 @@ namespace Microondas
                 counter.Text = "Aquecida!";
                 timer1.Enabled = false;
                 resetar();
+                atualizarPotencia();
             }
             else
                 atualizarContador();
@@ -92,6 +85,7 @@ namespace Microondas
             resetar();
             timer1.Enabled = false;
             Display.cancel();
+            atualizarPotencia();
             atualizarContador();
         }
 
@@ -108,6 +102,7 @@ namespace Microondas
 
         private void BtnPausar_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
             resetar();
         }
 
@@ -141,14 +136,33 @@ namespace Microondas
 
         private void inicioRapido(object sender, EventArgs e)
         {
-            Potencia = 8;
-            concatenarTempo(Display.Secunds + 30);
-            if (timer1.Enabled == false)
+            bool inici_rapido = true;
+            if(timer1.Enabled != true || inici_rapido)
             {
-                atualizarPotencia();
-                iniciar();
+                Potencia = 8;
+                checarTempo(Convert.ToString(Display.Secunds + 30));
+                if (timer1.Enabled == false)
+                {
+                    atualizarPotencia();
+                    iniciar();
+                }
+                resetar();
             }
-            resetar();
+        }
+
+        private void checarTempo(string tempo)
+        {
+            Tempo = tempo;
+            if (Convert.ToInt16(Tempo) <= 200)
+            {
+                Display.makeDisplay(Convert.ToInt16(Tempo));
+                atualizarContador();
+            }
+            else
+            {
+                Display.Minutes = 02;
+                Display.Secunds = 00;
+            }
         }
     }
 }
