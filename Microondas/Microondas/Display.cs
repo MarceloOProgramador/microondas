@@ -23,6 +23,7 @@ namespace Microondas
 
         /**
          * nome: makeDisplay;
+         * params: int tempo
          * Descricao: Esse método irá construir o display timer, para a contagem;
          * return void;
          */
@@ -39,21 +40,14 @@ namespace Microondas
             atualizarContador();
         }
 
+        /**
+         * Name: ContagemDePreparo
+         * Descricao: Metodo responsável pela contagem do tempo
+         * return bool
+         */
         public bool contagemDePrepaparo()
         {
-            if(IndicadorDePotencia.Contains(".") || indicadorDePotencia == "")
-            {
-                if (contadorDePotencia >= Potencia)
-                {
-                    contadorDePotencia = 0;
-                    IndicadorDePotencia = "";
-                }
-                else
-                {
-                    IndicadorDePotencia += ".";
-                    contadorDePotencia++;
-                }
-            }
+            definirIndicadorDePotencia();
 
             if (Minutes == 0 && Secunds == 0)
             {
@@ -77,6 +71,33 @@ namespace Microondas
             return false;
         }
 
+        /**
+         * Name: ContagemDePreparo
+         * Descricao: definição do indicador de potencia (. ou caractere relativo)
+         * return bool
+         */
+        private void definirIndicadorDePotencia()
+        {
+            if (IndicadorDePotencia.Contains(".") || indicadorDePotencia == "")
+            {
+                if (contadorDePotencia >= Potencia)
+                {
+                    contadorDePotencia = 0;
+                    IndicadorDePotencia = "";
+                }
+                else
+                {
+                    IndicadorDePotencia += ".";
+                    contadorDePotencia++;
+                }
+            }
+        }
+
+        /**
+         * Name: atualizarContador
+         * Descricao: Metodo responsável por atualizar o tempo do display
+         * return void
+         */
         public void atualizarContador()
         {
 
@@ -90,6 +111,11 @@ namespace Microondas
                 
         }
 
+        /**
+         * Name: cancel
+         * Descricao: Medoto zera o display de contagem;
+         * return void
+         */
         public void cancel()
         {
             Minutes = 00;
@@ -98,6 +124,11 @@ namespace Microondas
             atualizarContador();
         }
 
+        /**
+         * Name: cancel
+         * Descricao: Medoto responsável por setar 2 minutos ao contador
+         * return void
+         */
         public void setarDoisMinutos()
         {
             Minutes = 02;
